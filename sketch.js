@@ -1,60 +1,62 @@
-var option = 1; 
+var ay;
+
+function preload() {
+  ay = loadImage('22.png');
+}
+
 
 function setup() {
-  createCanvas(300, 300);
-  noFill();
+  createCanvas(windowWidth, windowHeight);
+  textFont('Hi Melody');
+  background(0);
+  noStroke();
+  ay = loadImage('22.png');
+
 }
 
 function draw() {
-  background(255);
-  var density = map(mouseX, 0, width, 20, 50);
-  
-  if (option == 1){
-    for (var x = 50; x<= width-50; x+= density){
-      for (var y = 50; y<= height-50; y+=density){
-        line(x-5, y-5, x+5, y+5);
-        line(x+5, y-5, x-5, y+5);
-      }
-    }
-  }
-  else if (option == 2) {
-    for (var x = 50; x<= width-50; x+= density){
-      for (var y = 50; y<= height-50; y+=density){
-        line(x, y, width/2, height/2);
-      }
-    }
-  }
-  else if (option == 3){
-    for (var x = 50; x<= width-50; x+= density){
-      for (var y = 50; y<= height-50; y+=density){
-        ellipse(x, y, 40, 40);
-      }
-    }
-  }
-  else if (option == 4) {
-    var count = 0;
-    for (var x = 50; x<= width-50; x+= density){
-      for (var y = 50; y<= height-50; y+=density){
-        strokeWeight(count+0.2);
-        ellipse(x, y, 20, 20);
-        count++;
-      }
-    }
-  }
-  else if (option == 5){
-    //strokeWeight(1);
-   for (var x = 50; x < width-50; x+= density){
-     for (var y = 50; y< height-50; y+= density){
-       for (var i = 0; i<16; i+=4){
-         line(x+i, y, x+i, y+12);
-       }
-       line(x, y, x+12, y+12);
-     }
-   }
-  }
-}
 
-function mousePressed(){
-  option++;
-  if (option>5) option = 1;
+
+  fill(0);
+  rect(0, 0, windowWidth, windowHeight - 100);
+  noStroke();
+  fill(255);
+
+  x = constrain(mouseX, 100, windowWidth - 100)
+  y = constrain(mouseY, 100, windowHeight - 150)
+
+  fill(0);
+  stroke(0);
+
+
+  for (var ey = 0; ey <= height - 100; ey += 100) {
+    for (var ex = 0; ex <= width; ex += x) {
+      stroke(8, 249, 249);
+      strokeWeight(1);
+      line(0, ey, x, y);
+
+
+      line(windowWidth, ey, x, y);
+
+    }
+  }
+
+  image(ay, x - 50, y - 50, 100, 100);
+
+  if (mouseIsPressed == true) {
+    strokeWeight(30);
+    stroke(8, 249, 249);
+    line(pmouseX, pmouseY, mouseX, mouseY);
+  }
+  textSize(30);
+  noStroke();
+  fill(0);
+  text("A color like that of snow, milk, or bone is said kind of WHITE. Thus, that is not TRUE. Cuz it's always just a white little lies.. . . ,", 10, windowHeight - 100, windowWidth, windowHeight - 10);
+
+
+  
+}
+function doubleClicked() {
+  fill(0);
+  rect(0, windowHeight-100, windowWidth, windowHeight);
 }
