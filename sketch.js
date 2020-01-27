@@ -41,7 +41,7 @@ function draw() {
     }
   }
 
-  image(ay, x - 50, y - 50, 100, 100);
+  //image(ay, x - 50, y - 50, 100, 100);
 
   if (mouseIsPressed == true) {
     strokeWeight(30);
