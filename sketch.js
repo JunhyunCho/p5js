@@ -32,7 +32,7 @@ function draw() {
   for (var ey = 0; ey <= height - 100; ey += 100) {
     for (var ex = 0; ex <= width; ex += x) {
       stroke(80, 249, 249);
-      strokeWeight(1);
+      strokeWeight(3);
       line(0, ey, x, y);
 
 
