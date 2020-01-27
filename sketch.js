@@ -52,8 +52,6 @@ function draw() {
   noStroke();
   fill(0);
   text("A color like that of snow, milk, or bone is said kind of WHITE. Thus, that is not TRUE. Cuz it's always just a white little lies.. . . ,", 10, windowHeight - 100, windowWidth, windowHeight - 10);
-
-
   
 }
 function doubleClicked() {
