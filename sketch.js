@@ -1,60 +1,73 @@
-var ay;
-
-function preload() {
-  ay = loadImage('22.png');
-}
-
+var stars = [];
+var speed = 0.07;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  textFont('Hi Melody');
+  createCanvas(800, 800);
   background(0);
-  noStroke();
-  ay = loadImage('22.png');
-
+  //noStroke();
+  stroke(255);
+  fill(255)
+  for (let i = 0; i < 100; i++) {
+    stars[i] = new Star(800, 800)
+  }
 }
 
 function draw() {
+  background(0);
+  checkSpeed();
+  for (let i = 0; i < stars.length; i++) {
+    stars[i].move();
+    stars[i].render();
+  }
+}
+
+function checkSpeed() {
+  speed = map(mouseX, 0, 800, 0, 0.1)
+}
+
+function Star(screenW, screenH) {
+
+  this.x = random(0, screenW);
+  this.y = random(0, screenH);
+  this.r = 1;
+
+  this.resetStar = function () {
+    this.x = random(0, screenW);
+    this.y = random(0, screenH);
+    this.pX = this.x;
+    this.pY = this.y;
+    this.r = 1;
+  }
+
+  this.pX = this.x;
+  this.pY = this.y;
+
+  this.move = function () {
+
+    this.pX = this.x;
+    this.pY = this.y;
+
+    let vX = this.x - screenW / 2;
+    let vY = this.y - screenH / 2;
+    //print(this.x, vX)
+    this.x = this.x + vX * speed;
+    this.y = this.y + vY * speed;
+    this.r = this.r * (1 + speed);
 
 
-  fill(0);
-  rect(0, 0, windowWidth, windowHeight - 100);
-  noStroke();
-  fill(255);
-
-  x = constrain(mouseX, 100, windowWidth - 100)
-  y = constrain(mouseY, 100, windowHeight - 150)
-
-  fill(0);
-  stroke(0);
-
-
-  for (var ey = 0; ey <= height - 100; ey += 100) {
-    for (var ex = 0; ex <= width; ex += x) {
-      stroke(180, 249, 249);
-      strokeWeight(3);
-      line(0, ey, x, y);
-
-
-      line(windowWidth, ey, x, y);
-
+    //check outside, then respawn
+    if (this.x > screenW | this.x < 0 | this.y > screenH | this.y < 0 | this.r > 20) {
+      this.resetStar();
     }
   }
 
-  //image(ay, x - 50, y - 50, 100, 100);
-
-  if (mouseIsPressed == true) {
-    strokeWeight(30);
-    stroke(8, 249, 249);
-    line(pmouseX, pmouseY, mouseX, mouseY);
+  this.render = function () {
+    //fill(255)
+    noStroke();
+    ellipse(this.x, this.y, this.r);
+    stroke(255)
+    strokeWeight(this.r)
+    line(this.x, this.y, this.pX, this.pY)
   }
-  textSize(30);
-  noStroke();
-  fill(0);
-  text("A color like that of snow, milk, or bone is said kind of WHITE. Thus, that is not TRUE. Cuz it's always just a white little lies.. . . ,", 10, windowHeight - 100, windowWidth, windowHeight - 10);
-  
-}
-function doubleClicked() {
-  fill(0);
-  rect(0, windowHeight-100, windowWidth, windowHeight);
+
 }
