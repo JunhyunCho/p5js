@@ -1,58 +1,36 @@
-var rains = [];
-var speed = 20;
+var sun
 
 function setup() {
-	createCanvas(800, 600);
-	background(255);
-	//noStroke();
+	createCanvas(800, 800);
+	background(0);
+	noStroke();
 	stroke(255);
 	fill(255)
-	for (let i = 0; i < 200; i++) {
-		rains[i] = new Rain(800, 800)
-	}
+	sun = new Planet(50, 0, 0, 0);
+	//sun.spawnMoon(5, 2)
 }
 
 function draw() {
-	background(255);
-	for (let i = 0; i < rains.length; i++) {
-		rains[i].move();
-		rains[i].render();
-	}
+	background(0)
+	sun.orbit();
+	sun.show();
 }
 
-function Rain(screenW, screenH) {
-
-	this.x = random(0, screenW);
-	this.y = random(-screenW, 0);
-	this.distance = random(1, 10);
-
-	this.resetRain = function () {
-		this.x = random(0, screenW);
-		this.y = random(-screenW, 0);
-		this.distance = random(1, 10);
+class Planet {
+	constructor(radius, distance, speed, startAngle) {
+		this.radius = radius;
+		this.distance = distance;
+		this.speed = speed;
+		this.startAngle = startAngle;
 	}
 
-	this.pX = this.x;
-	this.pY = this.y;
-
-	this.move = function () {
-
-		this.pX = this.x;
-		this.pY = this.y;
-
-		this.y = this.y + speed / this.distance + 5;
-
-		//check outside, then respawn
-		if (this.y > screenH + 100) { //| this.r > 20) {
-			this.resetRain();
-		}
+	orbit() {
+		this.angle += this.speed;
 	}
 
-	this.render = function () {
-		//fill(255)
-		strokeWeight(10 / this.distance)
-		stroke(180, 88, 219)
-		line(this.x, this.y, this.x, this.y + 100 / this.distance)
+	show() {
+		ellipse(0, 0, this.radius, this.radius);
 	}
+
 
 }
