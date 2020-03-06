@@ -26,7 +26,7 @@ function draw() {
 			let currentX = w * i + w / 2;
 			let currentY = w * j + w / 2
 			translate(currentX, currentY);
-			let angle = atan2(mouseY - currentY, mouseX - currentX) + PI / 2
+			let angle = atan2(mouseY - currentY, mouseX - currentX) - PI / 4
 			rotate(xy_array[i][j] + angle);
 			line(0, w / 2, 0, -w / 2);
 			pop();
